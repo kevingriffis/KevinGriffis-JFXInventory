@@ -33,7 +33,7 @@ public class Inventory {
         return null;
     }
 
-    public static ObservableList<Part> lookupPart(String partName){
+    public static Part lookupPart(String partName){
         for (Part part : Inventory.getAllParts()){
             if (part.getName() == partName){
                 return part;
@@ -51,7 +51,7 @@ public class Inventory {
         return null;
     }
 
-    public static ObservableList<Product> lookupProduct(String productName){
+    public static Product lookupProduct(String productName){
         for (Product product : Inventory.getAllProducts()){
             if (product.getName() == productName){
                 return product;
