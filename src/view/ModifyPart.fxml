@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModifyPartController">
    <children>
       <VBox layoutY="3.0" prefHeight="400.0" prefWidth="400.0">
@@ -20,8 +19,8 @@
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="400.0" spacing="30.0">
                <children>
                   <Label style="-fx-font-weight: bold;" text="Modify Part" />
-                  <RadioButton mnemonicParsing="false" text="In-House" />
-                  <RadioButton mnemonicParsing="false" text="Outsourced" />
+                  <RadioButton fx:id="inHouseRdoBtn" mnemonicParsing="false" text="In-House" />
+                  <RadioButton fx:id="outsourcedRdoBtn" mnemonicParsing="false" text="Outsourced" />
                </children>
                <padding>
                   <Insets left="20.0" right="20.0" />
@@ -48,17 +47,17 @@
                         <Label text="Inv" GridPane.rowIndex="2" />
                         <Label text="Price/Cost" GridPane.rowIndex="3" />
                         <Label text="Max" GridPane.rowIndex="4" />
-                        <Label text="Company Name" GridPane.rowIndex="5" />
-                        <TextField disable="true" editable="false" prefHeight="26.0" prefWidth="85.0" text="Auto-Gen - Disabled" GridPane.columnIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="inOutLabel" text="Company Name" GridPane.rowIndex="5" />
+                        <TextField fx:id="IdTxt" disable="true" editable="false" prefHeight="26.0" prefWidth="85.0" text="Auto-Gen - Disabled" GridPane.columnIndex="1" />
+                        <TextField fx:id="nameTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="invTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="priceCostTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="inOutTxt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
-                              <TextField prefHeight="26.0" prefWidth="55.0" />
+                              <TextField fx:id="maxTxt" prefHeight="26.0" prefWidth="55.0" />
                               <Label prefHeight="16.0" prefWidth="35.0" text="Min" />
-                              <TextField layoutX="10.0" layoutY="21.0" prefHeight="26.0" prefWidth="55.0" />
+                              <TextField fx:id="minTxt" layoutX="10.0" layoutY="21.0" prefHeight="26.0" prefWidth="55.0" />
                            </children>
                         </HBox>
                      </children>
@@ -70,8 +69,8 @@
             </AnchorPane>
             <HBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="400.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" text="Save" />
-                  <Button mnemonicParsing="false" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#onActionSave" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#onActionCancel" text="Cancel" />
                </children>
                <VBox.margin>
                   <Insets />
