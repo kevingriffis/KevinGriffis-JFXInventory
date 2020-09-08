@@ -152,8 +152,8 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" layoutX="358.0" prefHeight="100.0" prefWidth="571.0" spacing="10.0">
                <children>
-                  <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#onActionProductsSearch" text="Search" />
-                  <TextField fx:id="productSearchField" alignment="BOTTOM_CENTER" prefHeight="26.0" prefWidth="123.0" />
+                  <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#onActionPartsSearch" text="Search" />
+                  <TextField fx:id="partsSearchField" alignment="BOTTOM_CENTER" prefHeight="26.0" prefWidth="123.0" />
                </children>
                <padding>
                   <Insets bottom="20.0" />

@@ -58,23 +58,23 @@
                               <Font size="11.0" />
                            </font>
                         </Label>
-                        <TextField disable="true" editable="false" prefHeight="26.0" prefWidth="85.0" text="Auto-Gen - Disabled" GridPane.columnIndex="1">
+                        <TextField fx:id="IdTxt" disable="true" editable="false" prefHeight="26.0" prefWidth="85.0" text="Auto-Gen - Disabled" GridPane.columnIndex="1">
                            <font>
                               <Font size="11.0" />
                            </font>
                         </TextField>
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="nameTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="invTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="priceTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
-                              <TextField prefHeight="26.0" prefWidth="55.0" />
+                              <TextField fx:id="maxTxt" prefHeight="26.0" prefWidth="55.0" />
                               <Label prefHeight="16.0" prefWidth="30.0" text="Min">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="10.0" layoutY="21.0" prefHeight="26.0" prefWidth="55.0" />
+                              <TextField fx:id="minTxt" layoutX="10.0" layoutY="21.0" prefHeight="26.0" prefWidth="55.0" />
                            </children>
                         </HBox>
                      </children>
@@ -86,8 +86,8 @@
             </AnchorPane>
             <HBox alignment="CENTER_RIGHT" layoutY="454.0" prefHeight="50.0" prefWidth="935.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Save" />
-                  <Button mnemonicParsing="false" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#onActionSave" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#onActionCancel" text="Cancel" />
                </children>
                <padding>
                   <Insets right="70.0" />
@@ -97,17 +97,17 @@
                <children>
                   <AnchorPane prefHeight="151.0" prefWidth="571.0">
                      <children>
-                        <TableView prefHeight="101.0" prefWidth="523.0">
+                        <TableView fx:id="addPartsTableView" prefHeight="101.0" prefWidth="523.0">
                            <columns>
-                              <TableColumn prefWidth="108.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Part ID" />
-                              <TableColumn prefWidth="154.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Part Name" />
-                              <TableColumn prefWidth="120.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Inventory Level" />
-                              <TableColumn prefWidth="140.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Price/Cost per Unit" />
+                              <TableColumn fx:id="addPartsIdCol" prefWidth="108.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Part ID" />
+                              <TableColumn fx:id="addPartsNameCol" prefWidth="154.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Part Name" />
+                              <TableColumn fx:id="addPartsInvCol" prefWidth="120.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Inventory Level" />
+                              <TableColumn fx:id="addPartsPriceCostCol" prefWidth="140.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Price/Cost per Unit" />
                            </columns>
                         </TableView>
                         <HBox alignment="TOP_RIGHT" layoutY="101.0" prefHeight="26.0" prefWidth="523.0" spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Add" />
+                              <Button mnemonicParsing="false" onAction="#onActionAdd" text="Add" />
                            </children>
                            <padding>
                               <Insets right="20.0" top="5.0" />
@@ -120,17 +120,17 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="151.0" prefWidth="571.0">
                      <children>
-                        <TableView prefHeight="101.0" prefWidth="523.0">
+                        <TableView fx:id="deletePartsTableView" prefHeight="101.0" prefWidth="523.0">
                            <columns>
-                              <TableColumn prefWidth="108.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Part ID" />
-                              <TableColumn prefWidth="154.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Part Name" />
-                              <TableColumn prefWidth="120.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Inventory Level" />
-                              <TableColumn prefWidth="140.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Price/Cost per Unit" />
+                              <TableColumn fx:id="deletePartsIdCol" prefWidth="108.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Part ID" />
+                              <TableColumn fx:id="deletePartsNameCol" prefWidth="154.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Part Name" />
+                              <TableColumn fx:id="deletePartsInvCol" prefWidth="120.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Inventory Level" />
+                              <TableColumn fx:id="deletePartsPriceCostCol" prefWidth="140.0" style="-fx-font-weight: normal; -fx-font-size: 11;" text="Price/Cost per Unit" />
                            </columns>
                         </TableView>
                         <HBox alignment="TOP_RIGHT" layoutY="101.0" prefHeight="26.0" prefWidth="523.0" spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Delete" />
+                              <Button mnemonicParsing="false" onAction="#onActionDelete" text="Delete" />
                            </children>
                            <padding>
                               <Insets right="20.0" top="5.0" />
@@ -152,8 +152,8 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" layoutX="358.0" prefHeight="100.0" prefWidth="571.0" spacing="10.0">
                <children>
-                  <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" text="Search" />
-                  <TextField alignment="BOTTOM_CENTER" prefHeight="26.0" prefWidth="123.0" />
+                  <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#onActionPartsSearch" text="Search" />
+                  <TextField fx:id="partsSearchField" alignment="BOTTOM_CENTER" prefHeight="26.0" prefWidth="123.0" />
                </children>
                <padding>
                   <Insets bottom="20.0" />
