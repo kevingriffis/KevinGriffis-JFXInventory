@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Inventory;
 import model.Part;
 import model.Product;
 
@@ -18,7 +20,7 @@ public class MainMenuController implements Initializable {
     private TableView<Part> partsTableView;
 
     @FXML
-    private TableColumn<Part, Integer> PartIdCol;
+    private TableColumn<Part, Integer> partIdCol;
 
     @FXML
     private TableColumn<Part, String> partNameCol;
@@ -97,6 +99,22 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
+
+        // Display parts in TableView
+        partsTableView.setItems(Inventory.getAllParts());
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        // Display products in TableView
+        productsTableView.setItems(Inventory.getAllProducts());
+
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPriceCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
     }
 
