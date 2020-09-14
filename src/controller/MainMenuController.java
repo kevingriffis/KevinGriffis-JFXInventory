@@ -81,8 +81,12 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    void onActionPartsModify(ActionEvent event) {
+    void onActionPartsModify(ActionEvent event) throws IOException {
 
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ModifyPart.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
@@ -96,8 +100,12 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    void onActionProductsAdd(ActionEvent event) {
+    void onActionProductsAdd(ActionEvent event) throws IOException {
 
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/AddProduct.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
@@ -106,8 +114,12 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    void onActionProductsModify(ActionEvent event) {
+    void onActionProductsModify(ActionEvent event) throws IOException {
 
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ModifyProduct.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @Override
