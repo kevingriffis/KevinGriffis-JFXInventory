@@ -102,9 +102,15 @@ public class MainMenuController implements Initializable {
 
     @FXML
     void onActionPartsModify(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/ModifyPart.fxml"));
+        loader.load();
+
+        ModifyPartController mpcController = loader.getController();
+        mpcController.sendPart(partsTableView.getSelectionModel().getSelectedItem());
 
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ModifyPart.fxml"));
+        Parent scene = loader.getRoot();
         stage.setScene(new Scene(scene));
         stage.show();
     }

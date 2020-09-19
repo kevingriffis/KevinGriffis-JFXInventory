@@ -20,11 +20,11 @@
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="400.0" spacing="30.0">
                <children>
                   <Label style="-fx-font-weight: bold;" text="Modify Part" />
-                  <RadioButton fx:id="inHouseRdoBtn" mnemonicParsing="false" selected="true" text="In-House">
+                  <RadioButton fx:id="inHouseRdoBtn" mnemonicParsing="false" onAction="#onActionInHouseRdoBtn" selected="true" text="In-House">
                      <toggleGroup>
                         <ToggleGroup fx:id="partTypeTG" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="outsourcedRdoBtn" mnemonicParsing="false" text="Outsourced" toggleGroup="$partTypeTG" />
+                  <RadioButton fx:id="outsourcedRdoBtn" mnemonicParsing="false" onAction="#onActionOutsourcedRdoBtn" text="Outsourced" toggleGroup="$partTypeTG" />
                </children>
                <padding>
                   <Insets left="20.0" right="20.0" />
