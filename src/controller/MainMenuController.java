@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,24 @@ public class MainMenuController implements Initializable {
 
     Stage stage;
     Parent scene;
+
+    private void displayPartsInTableView(ObservableList<Part> partList) {
+        partsTableView.setItems(partList);
+
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    private void displayProductsInTableView(ObservableList<Product> productList) {
+        productsTableView.setItems(productList);
+
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPriceCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
 
     @FXML
     private TableView<Part> partsTableView;
@@ -91,11 +111,34 @@ public class MainMenuController implements Initializable {
 
     @FXML
     void onActionPartsSearch(ActionEvent event) {
+        ObservableList<Part> partsList = FXCollections.observableArrayList();
 
+        if (partsSearchField.getText().equals("")) {
+            displayPartsInTableView(Inventory.getAllParts());
+        } else {
+            for(Part part : Inventory.getAllParts()){
+                if (part.getName().contains(partsSearchField.getText())) {
+                    partsList.add(part);
+                }
+            }
+            displayPartsInTableView(partsList);
+        }
     }
 
     @FXML
     void onActionProductSearch(ActionEvent event) {
+        ObservableList<Product> productsList = FXCollections.observableArrayList();
+
+        if (productSearchField.getText().equals("")) {
+            displayProductsInTableView(Inventory.getAllProducts());
+        } else {
+            for(Product product : Inventory.getAllProducts()){
+                if (product.getName().contains(productSearchField.getText())) {
+                    productsList.add(product);
+                }
+            }
+            displayProductsInTableView(productsList);
+        }
 
     }
 
@@ -126,20 +169,10 @@ public class MainMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
 
         // Display parts in TableView
-        partsTableView.setItems(Inventory.getAllParts());
-
-        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        partPriceCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        displayPartsInTableView(Inventory.getAllParts());
 
         // Display products in TableView
-        productsTableView.setItems(Inventory.getAllProducts());
-
-        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        productInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        productPriceCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        displayProductsInTableView(Inventory.getAllProducts());
 
     }
 
