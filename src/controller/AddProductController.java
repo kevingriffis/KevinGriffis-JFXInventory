@@ -78,7 +78,7 @@ public class AddProductController implements Initializable {
         // Same algorithm as findNextAvailablePartId, but applied to products
         // This algorithm will not reuse deleted IDs that are between
         // existing IDs
-        ArrayList<Integer> idArrayList = new ArrayList<Integer>();
+        ArrayList<Integer> idArrayList = new ArrayList<>();
         int greatest;
 
         for (Product product :
@@ -182,7 +182,7 @@ public class AddProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Since this is a new product, all the parts will be listed in the Add table
+
         displayAddPartsInTableView(Inventory.getAllParts());
 
         // Show the parts that will be added on save (so they can be deleted)
