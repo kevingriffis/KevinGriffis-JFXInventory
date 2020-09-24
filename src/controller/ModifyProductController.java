@@ -3,15 +3,16 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
@@ -27,7 +28,7 @@ public class ModifyProductController implements Initializable {
     private ObservableList<Part> productParts = FXCollections.observableArrayList();
 
     @FXML
-    private TextField IdTxt;
+    private TextField idTxt;
 
     @FXML
     private TextField nameTxt;
@@ -79,14 +80,14 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     void onActionAdd(ActionEvent event) {
-
+        productParts.add(addPartsTableView.getSelectionModel().getSelectedItem());
     }
 
     public void sendProduct(Product product) {
         // Get the index of the product from the Inventory ObservableList
         productIndex = Inventory.getAllProducts().indexOf(product);
 
-        IdTxt.setText(String.valueOf(product.getId()));
+        idTxt.setText(String.valueOf(product.getId()));
         nameTxt.setText(product.getName());
         invTxt.setText(String.valueOf(product.getStock()));
         priceTxt.setText(String.valueOf(product.getPrice()));
@@ -118,23 +119,67 @@ public class ModifyProductController implements Initializable {
     }
 
     @FXML
-    void onActionCancel(ActionEvent event) {
+    void onActionCancel(ActionEvent event) throws IOException {
 
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML
     void onActionDelete(ActionEvent event) {
-
+        productParts.remove(deletePartsTableView.getSelectionModel().getSelectedItem());
     }
 
     @FXML
     void onActionPartsSearch(ActionEvent event) {
+        ObservableList<Part> partsList = FXCollections.observableArrayList();
 
+        if (partsSearchField.getText().equals("")) {
+            displayAddPartsInTableView(Inventory.getAllParts());
+        } else {
+            for(Part part : Inventory.getAllParts()){
+                if (part.getName().contains(partsSearchField.getText())) {
+                    partsList.add(part);
+                }
+            }
+            displayAddPartsInTableView(partsList);
+        }
     }
 
     @FXML
-    void onActionSave(ActionEvent event) {
+    void onActionSave(ActionEvent event) throws IOException {
 
+        try {
+            int id = Integer.parseInt(idTxt.getText());
+            String name = nameTxt.getText();
+            double price = Double.parseDouble(priceTxt.getText());
+            int stock = Integer.parseInt(invTxt.getText());
+            int min = Integer.parseInt(minTxt.getText());
+            int max = Integer.parseInt(maxTxt.getText());
+
+            Product product = new Product(id, name, price, stock, min, max);
+
+            for (Part part : productParts) {
+                product.addAssociatedPart(part);
+            }
+
+            Inventory.updateProduct(productIndex, product);
+
+            // Return to Main Menu
+            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Please enter valid values for each field!");
+            alert.showAndWait();
+        }
     }
 
     @Override
