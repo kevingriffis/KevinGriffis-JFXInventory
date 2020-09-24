@@ -157,6 +157,22 @@ public class AddProductController implements Initializable {
             int min = Integer.parseInt(minTxt.getText());
             int max = Integer.parseInt(maxTxt.getText());
 
+            // Check to see if stock is out of bounds of minimum and maximum inventory
+            if(stock > max) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setContentText("Inventory is greater than the maximum entered.");
+                alert.showAndWait();
+                return;
+
+            } else if (stock < min) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setContentText("Inventory is less than the minimum entered.");
+                alert.showAndWait();
+                return;
+            }
+
             Product product = new Product(id, name, price, stock, min, max);
 
             for (Part part : addedParts) {
