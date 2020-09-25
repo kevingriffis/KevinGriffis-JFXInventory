@@ -96,10 +96,18 @@ public class ModifyPartController implements Initializable {
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
 
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm");
+        alert.setContentText("Are you sure?");
+
+        alert.showAndWait();
+
+        if(alert.getResult().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
     }
 
     @FXML

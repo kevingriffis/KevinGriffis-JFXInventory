@@ -119,15 +119,32 @@ public class AddProductController implements Initializable {
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
 
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm");
+        alert.setContentText("Are you sure?");
+
+        alert.showAndWait();
+
+        if(alert.getResult().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
     }
 
     @FXML
     void onActionDelete(ActionEvent event) {
-        addedParts.remove(deletePartsTableView.getSelectionModel().getSelectedItem());
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm");
+        alert.setContentText("Are you sure you want to delete?");
+
+        alert.showAndWait();
+
+        if(alert.getResult().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+            addedParts.remove(deletePartsTableView.getSelectionModel().getSelectedItem());
+        }
     }
 
     @FXML
